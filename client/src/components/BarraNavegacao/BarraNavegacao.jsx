@@ -12,7 +12,21 @@ import { AuthContext } from "../../contexts/UserContext.jsx";
 import { useContext } from "react";
 
 // Importanto os icones
-import { BsBoxes } from "react-icons/bs";
+import {
+  BsBoxes,
+  BsBuilding,
+  BsBuildingAdd,
+  BsBuildingGear,
+  BsHouse,
+  BsPeople,
+  BsPersonAdd,
+  BsPersonGear,
+  BsPlusCircle,
+  BsShop,
+  BsSpeedometer,
+  BsTable,
+  BsViewStacked,
+} from "react-icons/bs";
 
 const BarraNavegacao = () => {
   // importar o nome de usuario logado e funcao logout
@@ -34,25 +48,25 @@ const BarraNavegacao = () => {
     >
       {/* Logo da empresa */}
       <Navbar.Brand as={NavLink} to="/home" className="text-white mb-3">
-        <BsBoxes className="fs-4" />
-        <span className="fs-5 ms-2">C&G Solutions</span>
+        <BsShop className="fs-1" />
+        <span className="fs-2 ms-2" >C&G Solutions</span>
       </Navbar.Brand>
 
       {/* Opções de menu */}
       <Nav className="flex-column mb-auto">
         {/* Opção home */}
         <Nav.Link as={NavLink} to="/home" className="text-white px-2">
-          <BsBoxes className="fs-4" />
+          <BsHouse className="fs-4" />
           <span className="fs-5 ms-2">Home</span>
         </Nav.Link>    
 
         {/* Criando o arcordeon */}
-        <Accordion flush className="flex-column mb-auto">
+        <Accordion flush className="flex-column mb-auto" alwaysOpen>
           {/* Páginas produtos */}
           <Accordion.Item eventKey="0" className="bg-dark text-white">
             <Accordion.Header className={styles.accordionHeader}>
               <BsBoxes className="fs-4" />
-              <span className="ms-2"> Produtos </span>
+              <span className="ms-2 fs-5 fs-5"> Produtos </span>
             </Accordion.Header>
             <Accordion.Body className={`p-0 bg-dark ${styles.accordionBody}`}>
               <Nav className="flex-column">
@@ -62,8 +76,8 @@ const BarraNavegacao = () => {
                   to="/produtos"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Listar </span>
+                  <BsViewStacked className="fs-5" />
+                  <span className="ms-2 fs-5 fs-5"> Listar </span>
                 </Nav.Link>
                 {/* Opção 2 */}
                 <Nav.Link
@@ -71,8 +85,8 @@ const BarraNavegacao = () => {
                   to="/produtos/cadastrar"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Adicionar </span>
+                  <BsPlusCircle className="fs-5" />
+                  <span className="ms-2 fs-5 fs-5"> Adicionar </span>
                 </Nav.Link>
               </Nav>
             </Accordion.Body>
@@ -80,10 +94,10 @@ const BarraNavegacao = () => {
           {/* fim produtos */}
 
           {/* Páginas cliente */}
-          <Accordion.Item eventKey="1" className="bg-dark text-white">
+          <Accordion.Item eventKey="1" className="bg-dark text-white" >
             <Accordion.Header className={styles.accordionHeader}>
-              <BsBoxes className="fs-4" />
-              <span className="ms-2"> Clientes </span>
+              <BsPeople className="fs-4" />
+              <span className="ms-2 fs-5 fs-5"> Clientes </span>
             </Accordion.Header>
             <Accordion.Body className={`p-0 bg-dark ${styles.accordionBody}`}>
               <Nav className="flex-column">
@@ -93,8 +107,8 @@ const BarraNavegacao = () => {
                   to="/clientes"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Listar </span>
+                  <BsPersonGear className="fs-5" />
+                  <span className="ms-2 fs-5"> Listar </span>
                 </Nav.Link>
                 {/* Opção 2 */}
                 <Nav.Link
@@ -102,8 +116,8 @@ const BarraNavegacao = () => {
                   to="/clientes/cadastrar"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Adicionar </span>
+                  <BsPersonAdd className="fs-5" />
+                  <span className="ms-2 fs-5"> Adicionar </span>
                 </Nav.Link>
               </Nav>
             </Accordion.Body>
@@ -113,8 +127,8 @@ const BarraNavegacao = () => {
           {/* Páginas funcionarios */}
           <Accordion.Item eventKey="2" className="bg-dark text-white">
             <Accordion.Header className={styles.accordionHeader}>
-              <BsBoxes className="fs-4" />
-              <span className="ms-2"> Funcionários </span>
+              <BsBuilding className="fs-4" />
+              <span className="ms-2 fs-5"> Funcionários </span>
             </Accordion.Header>
             <Accordion.Body className={`p-0 bg-dark ${styles.accordionBody}`}>
               <Nav className="flex-column">
@@ -124,8 +138,8 @@ const BarraNavegacao = () => {
                   to="/funcionarios"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Listar </span>
+                  <BsBuildingAdd className="fs-5" />
+                  <span className="ms-2 fs-5"> Listar </span>
                 </Nav.Link>
                 {/* Opção 2 */}
                 <Nav.Link
@@ -133,8 +147,8 @@ const BarraNavegacao = () => {
                   to="/funcionarios/cadastrar"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Adicionar </span>
+                  <BsBuildingAdd className="fs-5" />
+                  <span className="ms-2 fs-5"> Adicionar </span>
                 </Nav.Link>
               </Nav>
             </Accordion.Body>
@@ -145,8 +159,8 @@ const BarraNavegacao = () => {
           {/* Páginas Pedidos */}
           <Accordion.Item eventKey="3" className="bg-dark text-white">
             <Accordion.Header className={styles.accordionHeader}>
-              <BsBoxes className="fs-4" />
-              <span className="ms-2"> Pedidos </span>
+              <BsTable className="fs-4" />
+              <span className="ms-2 fs-5"> Pedidos </span>
             </Accordion.Header>
             <Accordion.Body className={`p-0 bg-dark ${styles.accordionBody}`}>
               <Nav className="flex-column">
@@ -156,8 +170,8 @@ const BarraNavegacao = () => {
                   to="/pedidos"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Listar </span>
+                  <BsTable className="fs-5" />
+                  <span className="ms-2 fs-5"> Listar </span>
                 </Nav.Link>
                 {/* Opção 2 */}
                 <Nav.Link
@@ -165,8 +179,8 @@ const BarraNavegacao = () => {
                   to="/pedidos/cadastrar"
                   className="text-white ps-4"
                 >
-                  <BsBoxes className="fs-5" />
-                  <span className="ms-2"> Adicionar </span>
+                  <BsTable className="fs-5" />
+                  <span className="ms-2 fs-5"> Adicionar </span>
                 </Nav.Link>
               </Nav>
             </Accordion.Body>
@@ -176,8 +190,8 @@ const BarraNavegacao = () => {
 
          {/* Opção Relatórios */}
         <Nav.Link as={NavLink} to="/relatorios" className="text-white px-2">
-          <BsBoxes className="fs-4" />
-          <span className="fs-5 ms-2">Relatórios</span>
+          <BsSpeedometer className="fs-4" />
+          <span className="fs-5 ms-2 fs-5">Relatórios</span>
         </Nav.Link>
       </Nav>
 
