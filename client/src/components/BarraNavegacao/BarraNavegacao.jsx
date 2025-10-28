@@ -44,7 +44,7 @@ const BarraNavegacao = () => {
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark min-vh-100 max-vh-100"
-      style={{ width: "250px" }}
+      style={{ width: "300px" }}
     >
       {/* Logo da empresa */}
       <Navbar.Brand as={NavLink} to="/home" className="text-white mb-3">

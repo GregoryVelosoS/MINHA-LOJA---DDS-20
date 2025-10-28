@@ -30,7 +30,8 @@ const RotasProtegidas = () => {
      <div className="d-flex flex-column min-vh-100 flex-grow-1 p-2 justify-content-center"
           style={{marginLeft:"350px"}}>
         <Container fluid>
-          <h1>Conteúdo principal</h1>
+          {/* <h1>Conteúdo principal</h1> */}
+          <Outlet />
         </Container>
       </div> 
     </div>
