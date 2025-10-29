@@ -37,3 +37,26 @@ export function useListaMedidas() {
   ]);
   return medidas;
 }
+
+
+// CRUD PRODUTOS
+
+// C 
+export function useInserirProduto(){
+  // Recebe os dados vindo do formulário, faz uma requisição pra API, pra inserção do produto
+  // Utilizando o verdo POST
+  const inserirProduto = async (data) => {
+    const req = await fetch(`${url}/produtos`, {
+        method: "POST",
+        headers:{ "Content-type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    const res = await req.json()
+    console.log("Produto inserido:", res);
+    
+    //Retornar o produto inserido
+    return res
+  }
+  
+  return { inserirProduto }
+}
