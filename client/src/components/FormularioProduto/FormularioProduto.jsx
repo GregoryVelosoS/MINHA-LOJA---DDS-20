@@ -10,13 +10,23 @@ import Image from "react-bootstrap/Image";
 import { useForm } from "react-hook-form";
 
 // Importando o hook de produtos
-import { useListaCategorias, useListaMedidas, useInserirProduto } from "../../hooks/useProdutos";
+import {
+  useListaCategorias,
+  useListaMedidas,
+  useBuscarProdutoPorId,
+  useAtualizarProduto,
+} from "../../hooks/useProdutos";
+
+// Navigate - transitar entre páginas, params - pegar o id fornecido na url
+import { useNavigate, useParams } from "react-router-dom"
+
+// UseState- monitar variáveis e useffect pra realizar algo quando o componente carregar
+import { useState, useEffect } from "react";
 
 const FormularioProduto = (props) => {
-
   // IMPORTAÇÃO DAS FUNÇÕES VINDAS DO HOOK USEPRODUTOS
   // Usando a função de inserir produto vinda do hook
-  const { inserirProduto } = useInserirProduto()
+  const { inserirProduto } = useInserirProduto();
 
   // register = cria um objeto com os valores retirados dos inputs
   // handleSumbit = envia os dados formulário, caso dê erro ou sucesso
@@ -25,7 +35,7 @@ const FormularioProduto = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
   } = useForm();
 
   // Lista de categorias
@@ -35,32 +45,32 @@ const FormularioProduto = (props) => {
   const medis = useListaMedidas();
 
   // Variavel de produto sem imagem
-  const linkImagem = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA13yHQQqIo0itjIvx5np_T1BJcqtKSwErqQ&s"
+  const linkImagem =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA13yHQQqIo0itjIvx5np_T1BJcqtKSwErqQ&s";
 
   //Variavel pra armazenar o link da imagem, vindo do input
-  const imagemAtual = watch("imagemUrl")
+  const imagemAtual = watch("imagemUrl");
 
   // FUNÇÕES QUE LIDAM COM O SUCESSO OU ERRO DO FORMULÁRIO
   // Função pra caso dê certo na validação do formulário
   // data é o objeto com as informações dos campos do formulário
   const onSubmit = (data) => {
-      console.log("Dados:", data)
-      if (props.page === "cadastro") {
-        //Envia o objeto data para o hook inserir produto
-        inserirProduto(data)
-        alert("Produto cadastrado com sucesso")
-      }
-      else {
-        // Depois nóis vê
-      }
-  }
+    console.log("Dados:", data);
+    if (props.page === "cadastro") {
+      //Envia o objeto data para o hook inserir produto
+      inserirProduto(data);
+      alert("Produto cadastrado com sucesso");
+    } else {
+      // Depois nóis vê
+    }
+  };
   // Caso tenha algum erro no formulário, mostra as mensagens de erro nos campos
   const onError = (errors) => {
-      console.log("Erros:" , errors);
-  }
+    console.log("Erros:", errors);
+  };
   return (
     <div className="text-center">
-      <Form className="mt-3 w-full" onSubmit={handleSubmit( onSubmit , onError )}>
+      <Form className="mt-3 w-full" onSubmit={handleSubmit(onSubmit, onError)}>
         <Row>
           <Col md={12} lg={6}>
             {/* Caixinha de SKU */}
@@ -309,9 +319,15 @@ const FormularioProduto = (props) => {
                 </FloatingLabel>
                 {/* Fim de caixinha de preco de custo */}
               </Col>
-              <Col> {/* Segunda coluna */}
+              <Col>
+                {" "}
+                {/* Segunda coluna */}
                 {/* Caixinha de preco de venda */}
-                <FloatingLabel controlId="FI-PV" label="Preço de venda" className="mb-5">
+                <FloatingLabel
+                  controlId="FI-PV"
+                  label="Preço de venda"
+                  className="mb-5"
+                >
                   <Form.Control
                     type="number"
                     {...register("precoVenda", {
@@ -322,38 +338,47 @@ const FormularioProduto = (props) => {
                       },
                     })}
                   ></Form.Control>
-                  {errors.precoVenda && (<p className="error"> {errors.precoVenda.message} </p>)}
+                  {errors.precoVenda && (
+                    <p className="error"> {errors.precoVenda.message} </p>
+                  )}
                 </FloatingLabel>
                 {/* Fim de caixinha de preco de venda */}
               </Col>
             </Row>
             {/* Caixinha de imagem */}
-              <Form.Group controlId="FI-IMAGEM" className="mb-5">
-                    <FloatingLabel controlId="FI-IMAGEM-LINK" label="Link da imagem" className="mb-5">
-                      <Form.Control
-                        type="url"
-                        { ...register("imagemUrl", {
-                          required: "O link é obrigatório",
-                          pattern: {
-                            value: /^(http|https):\/\/[^ "]+$/,
-                            message: "Insira um link válido"
-                          }
-                        })}>
-                      </Form.Control>
-                      {errors.imagemUrl && (<p className="error"> {errors.imagemUrl.message}</p>)}
-                    </FloatingLabel>
-                    <Image 
-                    width={200} 
-                    height={200} 
-                    rounded 
-                    src={imagemAtual == "" ? linkImagem : imagemAtual}/>
-              </Form.Group>
+            <Form.Group controlId="FI-IMAGEM" className="mb-5">
+              <FloatingLabel
+                controlId="FI-IMAGEM-LINK"
+                label="Link da imagem"
+                className="mb-5"
+              >
+                <Form.Control
+                  type="url"
+                  {...register("imagemUrl", {
+                    required: "O link é obrigatório",
+                    pattern: {
+                      value: /^(http|https):\/\/[^ "]+$/,
+                      message: "Insira um link válido",
+                    },
+                  })}
+                ></Form.Control>
+                {errors.imagemUrl && (
+                  <p className="error"> {errors.imagemUrl.message}</p>
+                )}
+              </FloatingLabel>
+              <Image
+                width={200}
+                height={200}
+                rounded
+                src={imagemAtual == "" ? linkImagem : imagemAtual}
+              />
+            </Form.Group>
             {/* Fim de caixinha de imagem */}
           </Col>
         </Row>
         {/* Botão para envio do formulário */}
         <Button variant="primary" size="lg" type="submit">
-            {props.page === "editar" ? "Atualizar" : "Cadastrar"}
+          {props.page === "editar" ? "Atualizar" : "Cadastrar"}
         </Button>
       </Form>
     </div>

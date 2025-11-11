@@ -98,3 +98,31 @@ export function useDeletaProduto(){
 
   return { deletarProduto }
 }
+
+// U - Atualizar
+// Hook para buscar informações de um produto específico
+export function useBuscarProdutoPorId(){
+  // Recebe o id do produto e busca as informações 
+  const buscarProdutoPorId = async (idProduto) => {
+    const req = await fetch(`${url}/produtos/${idProduto}`)
+    const res = await req.json()
+    console.log("Produto encontrado:", res);
+    return res
+  } 
+  return { buscarProdutoPorId }
+}
+
+// Hook para atualizar um produto
+export function useAtualizarProduto(){
+  // Envia os dados novos, para o produto específico
+  const atualizarProduto = async (data, idProduto) =>{
+      const req = await fetch(`${url}/produtos/${idProduto}`,{
+        method: "PUT",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      })
+      const res = await req.json()
+      return res
+  }
+  return { atualizarProduto }
+}

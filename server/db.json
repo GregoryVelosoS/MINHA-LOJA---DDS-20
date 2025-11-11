@@ -215,21 +215,6 @@
       "precoCusto": "4",
       "precoVenda": "6",
       "imagemUrl": "https://m.media-amazon.com/images/I/51O4bS147tL._AC_UF894,1000_QL80_.jpg"
-    },
-    {
-      "id": "dda5",
-      "sku": "78920",
-      "nome": "Café",
-      "descricao": "sim",
-      "categoria": "Alimentos e Bebidas",
-      "marca": "Itambé",
-      "fornecedor": "65",
-      "quantidade": "5",
-      "tamanho": "5",
-      "medida": "mL",
-      "precoCusto": "3",
-      "precoVenda": "5",
-      "imagemUrl": "https://i.pinimg.com/236x/ba/d3/84/bad3847f224bb1bd021bd34898771b01.jpg"
     }
   ],
   "categorias": [
