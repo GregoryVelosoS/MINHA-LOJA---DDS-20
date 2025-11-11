@@ -21,7 +21,7 @@ const CardProduto = (props) => {
              src={
                 props.imagemUrl != null
                 ? props.imagemUrl
-                : "Link produto sem imagem"
+                : "https://www.malhariapradense.com.br/wp-content/uploads/2017/08/produto-sem-imagem.png"
              }
             >
             </Card.Img>

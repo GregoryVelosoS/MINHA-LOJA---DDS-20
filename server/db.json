@@ -200,6 +200,21 @@
       "precoCusto": "70",
       "precoVenda": "76.5",
       "imagemUrl": "https://uploads.metroimg.com/wp-content/uploads/2023/01/03150942/WhatsApp-Image-2023-01-03-at-15.09.13.jpeg"
+    },
+    {
+      "id": "e12a",
+      "sku": "789100",
+      "nome": "Maria das Graças",
+      "descricao": "é um bolo, dentro de um pote",
+      "categoria": "Eletrônicos",
+      "marca": "Itambé",
+      "fornecedor": "Cafu",
+      "quantidade": "4",
+      "tamanho": "5",
+      "medida": "mL",
+      "precoCusto": "4",
+      "precoVenda": "6",
+      "imagemUrl": "https://m.media-amazon.com/images/I/51O4bS147tL._AC_UF894,1000_QL80_.jpg"
     }
   ],
   "categorias": [
