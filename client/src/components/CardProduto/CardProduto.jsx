@@ -5,10 +5,22 @@ import Button from "react-bootstrap/Button"
 // Importando o link para tranferência de página
 import { Link } from  "react-router-dom"
 
+// Importanto o hook de produtos
+import { useDeletaProduto } from '../../hooks/useProdutos' 
+
 const CardProduto = (props) => {
- 
+    
+    // importar a função de deletar produto
+    const { deletarProduto } = useDeletaProduto()
+
     // Função pra lidar com o delete
-    const handleDelete = () => {}
+    const handleDelete = async () => {
+        if(confirm(`Deseja realmente excluir o produto ${props.nome}?`)){
+            const deletado = await deletarProduto(props.id)
+            alert(`Produto ${props.nome} deletado com sucesso!`)
+            window.location.reload()
+        }
+    }
 
     return (
     <div>

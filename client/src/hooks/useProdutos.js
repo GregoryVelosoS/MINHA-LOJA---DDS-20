@@ -83,3 +83,18 @@ export function useListaProdutos(){
   // Retorna a lista de produtos
   return produtos
 }
+
+// D - Deletar
+export function useDeletaProduto(){
+  // Recebe o id do produto e requisita a api a exclusão
+  const deletarProduto = async (idProduto) => {
+    const req = await fetch(`${url}/produtos/${idProduto}`, {
+      method:"DELETE"
+    })
+    const res = await req.json()
+    // Retorna o produto deletado
+    return res
+  }
+
+  return { deletarProduto }
+}
