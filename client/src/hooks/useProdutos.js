@@ -60,3 +60,26 @@ export function useInserirProduto(){
   
   return { inserirProduto }
 }
+
+// R 
+export function useListaProdutos(){
+  //Lista de produtos
+  const [produtos, setProdutos] = useState([])
+  // UseEffect pra puxar os dados da API assim que o componente é renderizado
+  useEffect(() => {
+    async function fetchData(){
+      try{
+        const req = await fetch(`${url}/produtos`)
+        const res = await req.json()
+        setProdutos(res)
+      }
+      catch(error){
+        console.log(error.message);
+      }
+    }
+    fetchData()
+  },[])
+
+  // Retorna a lista de produtos
+  return produtos
+}
