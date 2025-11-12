@@ -21,13 +21,23 @@ import {
 import { useNavigate, useParams } from "react-router-dom"
 
 // UseState- monitar variáveis e useffect pra realizar algo quando o componente carregar
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 
 const FormularioProduto = (props) => {
   // IMPORTAÇÃO DAS FUNÇÕES VINDAS DO HOOK USEPRODUTOS
   // Usando a função de inserir produto vinda do hook
   const { inserirProduto } = useInserirProduto();
 
+  //usando a função de buscar o produto e atualizar
+  const { buscarProdutoPorId } = useBuscarProdutoPorId();
+  const { atualizarProduto } = useAtualizarProduto();
+
+  // Guardando o id do produto vindo da url
+  const { id } = useParams();
+
+  // Navigate para trocar de paginas
+  const navigate = useNavigate()
+  
   // register = cria um objeto com os valores retirados dos inputs
   // handleSumbit = envia os dados formulário, caso dê erro ou sucesso
   // formState { errors } = objeto que guarda uma lista de erros que aconteceram na tentativa do envio
@@ -36,6 +46,7 @@ const FormularioProduto = (props) => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset
   } = useForm();
 
   // Lista de categorias
@@ -50,6 +61,49 @@ const FormularioProduto = (props) => {
 
   //Variavel pra armazenar o link da imagem, vindo do input
   const imagemAtual = watch("imagemUrl");
+
+  // CASO O FORMULÁRIO SEJA DE EDIÇÃO, BUSCAR O PRODUTO ID
+  if(props.page === "editar"){
+    // Variavel que controla se o produto já foi carregado
+    const [carregado, setCarregado] = useState()
+
+    // Effect pra buscar o produto assim que o componente for montado
+    useEffect(()=>{
+        async function fetchProduto() {
+          try{
+            // Guarda as informações do produto na variável  
+            const produto = await buscarProdutoPorId(id)
+            console.log(produto)
+
+            // Se houver produto, reseta o formulário com os dados do produto
+            if(produto && !carregado){
+              reset({
+                  nome: produto.nome,
+                  descricao: produto.descricao,
+                  categoria: produto.categoria,
+                  imagemUrl: produto.imagemUrl,
+                  precoVenda: produto.precoVenda,
+                  precoCusto: produto.precoCusto,
+                  marca: produto.marca,
+                  tamanho: produto.tamanho,
+                  medida: produto.medida,
+                  sku: produto.sku,
+                  quantidade: produto.quantidade,
+                  fornecedor: produto.fornecedor,
+              })
+              //Evita chamadas múltiplas do reset
+              setCarregado(true)
+            }
+          }
+          catch(erro){
+            console.log(("Erro ao buscar o produto:", erro));
+            alert("Produto não encontrado")
+            navigate("/home")
+          }
+        }
+        fetchProduto()
+    },[])
+  }
 
   // FUNÇÕES QUE LIDAM COM O SUCESSO OU ERRO DO FORMULÁRIO
   // Função pra caso dê certo na validação do formulário
