@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import {
   useListaCategorias,
   useListaMedidas,
+  useInserirProduto,
   useBuscarProdutoPorId,
   useAtualizarProduto,
 } from "../../hooks/useProdutos";
