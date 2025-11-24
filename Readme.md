@@ -15,6 +15,7 @@ Em outro terminal, entre na pasta server:
     DB_USER=root
     DB_PASSWORD=usbw
     DB_NAME=sistema_pdv
-
+ - Crie o banco de dados utilizando o arquivo "data/banco.sql"
+ 
  - npm i : instala as dependências
  - npm run server :  inicia o servidor
