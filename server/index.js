@@ -21,14 +21,14 @@ const usuarioRouter = require("./routes/usuarioRouter.js");
 const clientesRouter = require("./routes/clientesRouter.js");
 const categoriaRouter = require("./routes/categoriaRouter.js");
 const produtosRouter = require("./routes/produtosRouter.js");
-// const pedidosRouter = require("./routes/pedidosRouter.js")
+const pedidosRouter = require("./routes/pedidosRouter.js")
 
-// Rotas
+// Rotas principais
 app.use("/usuarios", usuarioRouter);
 app.use("/clientes", clientesRouter);
 app.use("/categorias", categoriaRouter);
 app.use("/produtos", produtosRouter);
-// app.use("/pedidos", pedidosRouter)
+app.use("/pedidos", pedidosRouter)
 
 // Rota padrão do servidor
 app.get("/", (req, res) => {
